@@ -20,8 +20,12 @@ const io = new Server(server, {
 // app.get('/', (req, res) => {
 //   res.send('<h1>CodeXsync Server is Running</h1>');
 // });
-
-const PORT = process.env.PORT || 4000;
+require('dotenv').config({ path: '.env.local' });
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+const LocalPort = process.env.PORT;
+const PORT = LocalPort || 4000;
 server.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
